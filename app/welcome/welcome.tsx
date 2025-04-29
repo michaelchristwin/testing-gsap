@@ -1,3 +1,4 @@
+import Counter from "~/components/Counter";
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
 
@@ -34,7 +35,7 @@ export function Welcome() {
                     rel="noreferrer"
                   >
                     {icon}
-                    {text}
+                    <Counter from={0} to={20000} />
                   </a>
                 </li>
               ))}

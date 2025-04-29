@@ -7,9 +7,30 @@
 
 html,
 body {
+  overflow-x: hidden;
   @apply bg-white dark:bg-gray-950;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+.card-grid > *:nth-child(4) {
+  transform: scale(1.14);
+  z-index: 3;
+}
+
+.card-grid > :not(:nth-child(4)) {
+  /* Your styles here */
+  filter: blur(2px);
+  backdrop-filter: brightness(95%);
+}
+
+.card-grid > :is(:nth-child(3), :nth-child(5)) {
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.card-grid > :is(:nth-child(2), :nth-child(6)) {
+  transform: scale(1.05);
+  z-index: 1;
 }

@@ -12,11 +12,13 @@
     "@gsap/react": "^2.1.2",
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
+    "colorthief": "^2.6.0",
     "gsap": "^3.12.7",
     "isbot": "^5.1.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.5.3"
+    "react-router": "^7.5.3",
+    "vite-imagetools": "^7.0.5"
   },
   "devDependencies": {
     "@react-router/dev": "^7.5.3",
