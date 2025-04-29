@@ -57,7 +57,11 @@ const Page = () => {
     { scope: wrapper }
   );
   return (
-    <div ref={wrapper} style={{ padding: "none", margin: "none" }}>
+    <div
+      ref={wrapper}
+      style={{ padding: "none", margin: "none" }}
+      className={`w-full`}
+    >
       <div
         className={`first h-[100vh] m-0 p-0 box-border flex justify-center items-center`}
       >
@@ -103,7 +107,7 @@ const Page = () => {
         className={`scrollCcontainer h-[100vh] bg-orange-400 m-0 p-0 relative flex justify-center items-center`}
       >
         <h1>The animation is finished</h1>
-        <div className="one flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-10">
+        <div className="one h-[100vh] flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-10">
           <div
             style={{ backgroundImage: `url(${AnimeBg.img.src})` }}
             className="absolute inset-0 z-10 flex justify-center items-center bg-no-repeat bg-cover bg-center"
@@ -127,7 +131,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="two flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 bg-[#f08080]">
+        <div className="two h-[100vh] flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 bg-[#f08080]">
           <div className="absolute inset-0 bg-[#faf9f6] px-4 z-9 flex justify-center items-center">
             <div className="w-full transition-all duration-700 ease-out">
               <section className={`h-fit w-full mb-[100px]`}>
@@ -206,7 +210,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="three flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#e0ffff]">
+        <div className="three h-[100vh] flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#e0ffff]">
           <div className="absolute inset-0 bg-[#faf9f6] z-8 flex justify-center items-center">
             <div className="w-full space-y-6 transition-all duration-700 ease-out px-4">
               <h2
