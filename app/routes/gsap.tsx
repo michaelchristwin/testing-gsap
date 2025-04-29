@@ -131,84 +131,80 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="two flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 bg-[#f08080]">
-          <div className="absolute inset-0 bg-[#faf9f6] px-4 z-9 flex justify-center items-center">
-            <div className="w-full transition-all duration-700 ease-out">
-              <section className={`h-fit w-full mb-[100px]`}>
-                <div className="h-fit py-12">
-                  <div className="space-y-[50px]">
-                    <h2
-                      className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
-                    >
-                      Real Environmental Impact; Real Economic Value
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      {/* Top row: 2 cards */}
-                      <div className="bg-white rounded-lg shadow-sm h-64 flex items-center justify-center text-center">
-                        <div className="w-full h-full">
-                          <video
-                            src="/videos/m3terhead.webm"
-                            autoPlay
-                            muted
-                            loop
-                            playsInline
-                            className="w-full h-full object-contain"
-                          ></video>
-                        </div>
-                      </div>
-
-                      <Metric image={Panel.img.src}>
-                        <div
-                          className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                        >
-                          <Counter from={0} to={10000} />
-                          <p className={`font-[600] text-[20px] fade-in-block`}>
-                            kWh of electricity generated
-                          </p>
-                        </div>
-                      </Metric>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      {/* Bottom row: 3 cards */}
-                      <Metric image={WindTurbine.img.src}>
-                        <div
-                          className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                        >
-                          <Counter from={0} to={4000} />
-                          <p className={`font-[600] text-[20px] fade-in-block`}>
-                            Tonnes of CO₂ prevented
-                          </p>
-                        </div>
-                      </Metric>
-
-                      <Metric image={Revenue.img.src}>
-                        <div
-                          className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                        >
-                          <Counter from={0} to={30000} prefix="$" />
-                          <p className={`font-[600] text-[20px] fade-in-block`}>
-                            Revenue generated
-                          </p>
-                        </div>
-                      </Metric>
-
-                      <Metric image={EcoVillages.img.src}>
-                        <div
-                          className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                        >
-                          <Counter from={0} to={6} />
-                          <p className={`font-[600] text-[20px] fade-in-block`}>
-                            Ecovillages
-                          </p>
-                        </div>
-                      </Metric>
+        <div className="two flex h-fit justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 px-4">
+          <section className={`h-fit w-full bg-[#faf9f6] text-black`}>
+            <div className="h-fit py-12">
+              <div className="space-y-[50px]">
+                <h2
+                  className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
+                >
+                  Real Environmental Impact; Real Economic Value
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  {/* Top row: 2 cards */}
+                  <div className="bg-white rounded-lg shadow-sm h-64 flex items-center justify-center text-center">
+                    <div className="w-full h-full">
+                      <video
+                        src="/videos/m3terhead.webm"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-contain"
+                      ></video>
                     </div>
                   </div>
+
+                  <Metric image={Panel.img.src}>
+                    <div
+                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                    >
+                      <Counter from={0} to={10000} />
+                      <p className={`font-[600] text-[20px] fade-in-block`}>
+                        kWh of electricity generated
+                      </p>
+                    </div>
+                  </Metric>
                 </div>
-              </section>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Bottom row: 3 cards */}
+                  <Metric image={WindTurbine.img.src}>
+                    <div
+                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                    >
+                      <Counter from={0} to={4000} />
+                      <p className={`font-[600] text-[20px] fade-in-block`}>
+                        Tonnes of CO₂ prevented
+                      </p>
+                    </div>
+                  </Metric>
+
+                  <Metric image={Revenue.img.src}>
+                    <div
+                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                    >
+                      <Counter from={0} to={30000} prefix="$" />
+                      <p className={`font-[600] text-[20px] fade-in-block`}>
+                        Revenue generated
+                      </p>
+                    </div>
+                  </Metric>
+
+                  <Metric image={EcoVillages.img.src}>
+                    <div
+                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                    >
+                      <Counter from={0} to={6} />
+                      <p className={`font-[600] text-[20px] fade-in-block`}>
+                        Ecovillages
+                      </p>
+                    </div>
+                  </Metric>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
         </div>
         <div className="three flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#e0ffff]">
           <div className="absolute inset-0 bg-[#faf9f6] z-8 flex justify-center items-center">
