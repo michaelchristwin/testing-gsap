@@ -131,9 +131,9 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="two flex h-fit justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 px-4">
-          <section className={`h-fit w-full bg-[#faf9f6] text-black`}>
-            <div className="h-fit py-12">
+        <div className="two flex sm:h-[100vh] h-fit justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 px-4">
+          <section className={`h-full w-full bg-[#faf9f6] text-black`}>
+            <div className="h-full py-12">
               <div className="space-y-[50px]">
                 <h2
                   className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
@@ -206,16 +206,14 @@ const Page = () => {
             </div>
           </section>
         </div>
-        <div className="three flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#e0ffff]">
-          <div className="absolute inset-0 bg-[#faf9f6] z-8 flex justify-center items-center">
-            <div className="w-full space-y-6 transition-all duration-700 ease-out px-4">
-              <h2
-                className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
-              >
-                Let's build your project next
-              </h2>
-              <LogosCarousel />
-            </div>
+        <div className="three sm:h-[100vh] h-fit flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#faf9f6]">
+          <div className="w-full space-y-8 transition-all duration-700 ease-out px-4">
+            <h2
+              className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
+            >
+              Let's build your project next
+            </h2>
+            <LogosCarousel />
           </div>
         </div>
       </div>
