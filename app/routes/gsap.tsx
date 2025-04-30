@@ -210,9 +210,9 @@ const Page = () => {
           </section>
         </div>
         <div className="three sm:h-[100vh] h-fit flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#faf9f6]">
-          <div className="w-full space-y-8 transition-all duration-700 ease-out px-4">
+          <div className="w-full h-full sm:space-y-8 space-y-4 transition-all duration-700 ease-out px-4">
             <h2
-              className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
+              className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[20px] fade-in-block`}
             >
               Let's build your project next
             </h2>
