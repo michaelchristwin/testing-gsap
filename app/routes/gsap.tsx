@@ -64,6 +64,9 @@ const Page = () => {
     >
       <div
         className={`first h-[100vh] m-0 p-0 box-border flex justify-center items-center`}
+        style={{
+          background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a4a 100%)",
+        }}
       >
         <Particles />
         <div className="w-[90%] sm:w-[50%] text-white">

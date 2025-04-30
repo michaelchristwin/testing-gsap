@@ -1,19 +1,50 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@font-face {
+  font-family: "Jello-Stone";
+  src: url("/fonts/jello-stone-font/JelloStone-YqKz8.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "june-expt-variable";
+  src: url("/fonts/june-expt-font/june-expt-variable-active-vf.woff2")
+    format("woff2");
+  font-style: normal;
+  font-display: swap;
 }
 
 html,
 body {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   overflow-x: hidden;
-  @apply bg-white dark:bg-gray-950;
-
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
 }
+
+.jello-stone {
+  font-family: "Jello-Stone", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.june-expt-variable {
+  font-family: "june-expt-variable", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.caveat {
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.playwrite-hr {
+  font-family: "Playwrite HR", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 .card-grid > *:nth-child(4) {
   transform: scale(1.14);
   z-index: 3;
