@@ -13,6 +13,7 @@ import {
   Revenue,
   WindTurbine,
 } from "~/assets/images/metrics";
+import LogosCarousel from "~/components/LogosCarousel";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -30,21 +31,26 @@ const Page = () => {
     () => {
       if (!containerRef.current) return;
       // Create timeline for section transitions
+      const sections = 4; // Now you have 4 sections
+      const endScroll = window.innerHeight * (sections - 1);
       let tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: () => `+=${window.innerHeight * 2}`,
+          end: () => `+=${endScroll}`,
           scrub: 0.5,
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
-          snap: [0, 0.5, 1],
+          snap: {
+            snapTo: [0, 1 / 3, 2.2 / 3, 1],
+            duration: { min: 0.2, max: 0.8 },
+            ease: "power1.inOut",
+          },
           markers: true,
         },
       });
 
-      // Section 1 exit
       tl.to(
         ".heroText1",
         { opacity: 0, x: -700, ease: "power1.out", duration: 0.3 },
@@ -55,6 +61,8 @@ const Page = () => {
         { opacity: 0, x: 700, ease: "power1.out", duration: 0.3 },
         0
       );
+
+      // Section 1 exit
       tl.to(".hero", { opacity: 0, duration: 0.5 }, 0.2);
 
       // Section 2 enter
@@ -62,26 +70,36 @@ const Page = () => {
         ".one",
         { opacity: 0, y: 100 },
         { opacity: 1, y: 0, duration: 0.8, ease: "power1.inOut" },
-        0.3
+        0.5
       );
       tl.fromTo(
         ".island",
         { opacity: 0, scale: 0 },
         { opacity: 1, scale: 3, ease: "power1.out" },
-        0.5
+        1
       );
 
       // Section 2 exit
-      tl.to(".one", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 1.4);
+      tl.to(".one", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 2);
 
       // Section 3 enter
       tl.fromTo(
         ".two",
         { x: "-100%" },
-        { x: 0, duration: 0.5, ease: "power1.out" },
-        1.75
+        { x: 0, duration: 0.8, ease: "power1.out" },
+        2.5
+      );
+      // Section 3 exit
+      tl.to(".two", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 3.5);
+      // Section 4 enter
+      tl.fromTo(
+        ".three",
+        { y: "-100%" },
+        { y: 0, duration: 0.5, ease: "power1.out" },
+        4.0
       );
     },
+
     { scope: containerRef }
   );
 
@@ -236,6 +254,18 @@ const Page = () => {
             </div>
           </div>
         </section>
+      </div>
+      <div className="three h-screen justify-center items-center absolute inset-0 px-4">
+        <div className={`flex justify-center items-center w-full h-full`}>
+          <div className="w-full h-it sm:space-y-8 space-y-4 transition-all duration-700 ease-out px-4">
+            <h2
+              className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[20px] fade-in-block`}
+            >
+              Let's build your project next
+            </h2>
+            <LogosCarousel />
+          </div>
+        </div>
       </div>
     </div>
   );
