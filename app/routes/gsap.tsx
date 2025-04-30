@@ -39,12 +39,8 @@ const Page = () => {
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
+          snap: [0, 0.5, 1],
           markers: true,
-          snap: {
-            snapTo: 1 / 3,
-            duration: 0.5,
-            ease: "power1.inOut",
-          },
         },
       });
 
@@ -65,25 +61,25 @@ const Page = () => {
       tl.fromTo(
         ".one",
         { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power1.inOut" },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power1.inOut" },
         0.3
       );
       tl.fromTo(
         ".island",
         { opacity: 0, scale: 0 },
-        { opacity: 1, scale: 2, ease: "power1.out" },
-        0.4
+        { opacity: 1, scale: 3, ease: "power1.out" },
+        0.5
       );
 
       // Section 2 exit
-      tl.to(".one", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 0.7);
+      tl.to(".one", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 1.4);
 
       // Section 3 enter
       tl.fromTo(
         ".two",
-        { x: -300 },
-        { opacity: 1, x: 0, duration: 0.5, ease: "power1.out" },
-        0.75
+        { x: "-100%" },
+        { x: 0, duration: 0.5, ease: "power1.out" },
+        1.75
       );
     },
     { scope: containerRef }
@@ -166,7 +162,7 @@ const Page = () => {
         </div>
       </div>
       {/* Section 3 */}
-      <div className="two h-screen justify-center items-center absolute inset-0 opacity-0 px-4">
+      <div className="two h-screen justify-center items-center absolute inset-0 px-4">
         <section className={`h-full w-full bg-[#faf9f6] text-black`}>
           <div className="h-full py-12">
             <div className="space-y-[50px]">
