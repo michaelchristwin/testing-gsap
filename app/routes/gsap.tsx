@@ -13,7 +13,7 @@ import {
   Revenue,
   WindTurbine,
 } from "~/assets/images/metrics";
-import LogosCarousel from "~/components/LogosCarousel";
+
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function meta({}: Route.MetaArgs) {
@@ -22,91 +22,89 @@ export function meta({}: Route.MetaArgs) {
     { name: "description", content: "Welcome to Gsap testing ground!" },
   ];
 }
+
 const Page = () => {
-  const wrapper = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!wrapper.current) return;
+      if (!containerRef.current) return;
+      // Create timeline for section transitions
       let tl = gsap.timeline({
         scrollTrigger: {
-          trigger: ".scrollCcontainer",
+          trigger: containerRef.current,
           start: "top top",
-          end: "+=4000",
+          end: () => `+=${window.innerHeight * 2}`,
+          scrub: 0.5,
           pin: true,
-          scrub: true,
-          snap: 1 / 4,
+          pinSpacing: true,
+          anticipatePin: 1,
+          markers: true,
+          snap: {
+            snapTo: 1 / 3,
+            duration: 0.5,
+            ease: "power1.inOut",
+          },
         },
       });
-      tl.to(".one", {
-        duration: 2,
-        xPercent: -110,
-      });
 
-      tl.to(".two", {
-        yPercent: -110,
-        duration: 2,
-      });
+      // Section 1 exit
+      tl.to(
+        ".heroText1",
+        { opacity: 0, x: -700, ease: "power1.out", duration: 0.3 },
+        0
+      );
+      tl.to(
+        ".heroText2",
+        { opacity: 0, x: 700, ease: "power1.out", duration: 0.3 },
+        0
+      );
+      tl.to(".hero", { opacity: 0, duration: 0.5 }, 0.2);
 
-      tl.to(".three", {
-        xPercent: 110,
-        duration: 2,
-      });
+      // Section 2 enter
+      tl.fromTo(
+        ".one",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power1.inOut" },
+        0.3
+      );
       tl.fromTo(
         ".island",
         { opacity: 0, scale: 0 },
-        {
-          scrollTrigger: {
-            trigger: ".one",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.5,
-          },
-          opacity: 1,
-          scale: 5,
-          ease: "power1.out",
-        }
+        { opacity: 1, scale: 2, ease: "power1.out" },
+        0.4
       );
-      tl.to(".heroText1", {
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.5,
-        },
-        opacity: 0,
-        x: -700,
-        ease: "power1.out",
-      });
-      tl.to(".heroText2", {
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.5,
-        },
-        opacity: 0,
-        x: 700,
-        ease: "power1.out",
-      });
+
+      // Section 2 exit
+      tl.to(".one", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 0.7);
+
+      // Section 3 enter
+      tl.fromTo(
+        ".two",
+        { x: -300 },
+        { opacity: 1, x: 0, duration: 0.5, ease: "power1.out" },
+        0.75
+      );
     },
-    { scope: wrapper }
+    { scope: containerRef }
   );
+
   return (
     <div
-      ref={wrapper}
-      style={{ padding: "none", margin: "none" }}
-      className={`w-full`}
+      ref={containerRef}
+      style={{ padding: 0, margin: 0 }}
+      className="w-full h-screen overflow-hidden"
     >
+      {/* Section 1 */}
       <div
-        className={`first h-[100vh] hero m-0 p-0 box-border flex justify-center items-center`}
+        className="first h-screen hero m-0 p-0 box-border flex justify-center items-center absolute inset-0"
         style={{
           background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a4a 100%)",
         }}
       >
         <Particles />
         <div className="w-[90%] sm:w-[50%] text-white">
-          <div className={`w-full heroText1`}>
+          <div className="w-full heroText1">
             <h1 className="text-2xl text-start md:text-3xl font-bold mb-4">
               <span className="inline-block transition-all duration-700 ease-out playwrite-hr">
                 Introducing
@@ -116,19 +114,19 @@ const Page = () => {
               <span
                 className="inline-block transition-all duration-700 ease-out june-expt-variable"
                 style={{
-                  fontVariationSettings: ` 'STYL' 60`,
+                  fontVariationSettings: "'STYL' 60",
                 }}
               >
                 M3tering
               </span>
             </h1>
           </div>
-          <div className={`heroText2 w-full`}>
+          <div className="heroText2 w-full">
             <h1 className="text-6xl text-end md:text-8xl font-bold">
               <span
                 className="inline-block transition-all duration-700 ease-out june-expt-variable"
                 style={{
-                  fontVariationSettings: ` 'STYL' 60`,
+                  fontVariationSettings: "'STYL' 60",
                 }}
               >
                 Protocol
@@ -142,120 +140,106 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <div
-        className={`scrollCcontainer h-[100vh] bg-orange-400 m-0 p-0 relative flex justify-center items-center`}
-      >
-        <h1>The animation is finished</h1>
-        <div className="one flex justify-center items-center absolute overflow-x-hidden top-0 right-0 left-0 bottom-0 z-10">
-          <div
-            style={{ backgroundImage: `url(${AnimeBg.img.src})` }}
-            className="absolute inset-0 z-10 flex justify-center items-center bg-no-repeat bg-cover bg-center"
-          >
-            <div className="transition-all duration-700 ease-out flex items-center justify-center">
-              <div className="w-24 h-24 island md:w-32 md:h-32 rounded-full flex items-center justify-center">
-                <picture>
-                  {Object.entries(Island.sources).map(([type, srcset]) => (
-                    <source key={type} type={`image/${type}`} srcSet={srcset} />
-                  ))}
-                  <img
-                    src={Island.img.src}
-                    width={Island.img.w}
-                    height={Island.img.h}
-                    alt={`Island`}
-                    className={`max-w-full max-h-full transition-all duration-300 ease-in-out object-contain`}
-                  />
-                </picture>
-              </div>
+
+      {/* Section 2 */}
+      <div className="one h-screen flex justify-center items-center absolute inset-0 opacity-0">
+        <div
+          style={{ backgroundImage: `url(${AnimeBg.img.src})` }}
+          className="absolute inset-0 z-10 flex justify-center items-center bg-no-repeat bg-cover bg-center"
+        >
+          <div className="transition-all duration-700 ease-out flex items-center justify-center">
+            <div className="w-24 h-24 island md:w-32 md:h-32 rounded-full flex items-center justify-center">
+              <picture>
+                {Object.entries(Island.sources).map(([type, srcset]) => (
+                  <source key={type} type={`image/${type}`} srcSet={srcset} />
+                ))}
+                <img
+                  src={Island.img.src}
+                  width={Island.img.w}
+                  height={Island.img.h}
+                  alt="Island"
+                  className="max-w-full max-h-full transition-all duration-300 ease-in-out object-contain"
+                />
+              </picture>
             </div>
           </div>
         </div>
-        <div className="two flex sm:h-[100vh] h-fit justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-9 px-4">
-          <section className={`h-full w-full bg-[#faf9f6] text-black`}>
-            <div className="h-full py-12">
-              <div className="space-y-[50px]">
-                <h2
-                  className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
-                >
-                  Real Environmental Impact; Real Economic Value
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  {/* Top row: 2 cards */}
-                  <div className="bg-white rounded-lg shadow-sm h-64 flex items-center justify-center text-center">
-                    <div className="w-full h-full">
-                      <video
-                        src="/videos/m3terhead.webm"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-contain"
-                      ></video>
-                    </div>
-                  </div>
-
-                  <Metric image={Panel.img.src}>
-                    <div
-                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                    >
-                      <Counter from={0} to={10000} />
-                      <p className={`font-[600] text-[20px] fade-in-block`}>
-                        kWh of electricity generated
-                      </p>
-                    </div>
-                  </Metric>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Bottom row: 3 cards */}
-                  <Metric image={WindTurbine.img.src}>
-                    <div
-                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                    >
-                      <Counter from={0} to={4000} />
-                      <p className={`font-[600] text-[20px] fade-in-block`}>
-                        Tonnes of CO₂ prevented
-                      </p>
-                    </div>
-                  </Metric>
-
-                  <Metric image={Revenue.img.src}>
-                    <div
-                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                    >
-                      <Counter from={0} to={30000} prefix="$" />
-                      <p className={`font-[600] text-[20px] fade-in-block`}>
-                        Revenue generated
-                      </p>
-                    </div>
-                  </Metric>
-
-                  <Metric image={EcoVillages.img.src}>
-                    <div
-                      className={`block text-center space-y-[5px] w-full z-2 text-white`}
-                    >
-                      <Counter from={0} to={6} />
-                      <p className={`font-[600] text-[20px] fade-in-block`}>
-                        Ecovillages
-                      </p>
-                    </div>
-                  </Metric>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <div className="three sm:h-[100vh] h-fit flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#faf9f6]">
-          <div className={`flex justify-center items-center w-full h-full`}>
-            <div className="w-full h-it sm:space-y-8 space-y-4 transition-all duration-700 ease-out px-4">
+      </div>
+      {/* Section 3 */}
+      <div className="two h-screen justify-center items-center absolute inset-0 opacity-0 px-4">
+        <section className={`h-full w-full bg-[#faf9f6] text-black`}>
+          <div className="h-full py-12">
+            <div className="space-y-[50px]">
               <h2
-                className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[20px] fade-in-block`}
+                className={`text-center font-semibold lg:text-[30px] md:text-[28px] text-[25px] fade-in-block`}
               >
-                Let's build your project next
+                Real Environmental Impact; Real Economic Value
               </h2>
-              <LogosCarousel />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                {/* Top row: 2 cards */}
+                <div className="bg-white rounded-lg shadow-sm h-64 flex items-center justify-center text-center">
+                  <div className="w-full h-full">
+                    <video
+                      src="/videos/m3terhead.webm"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-contain"
+                    ></video>
+                  </div>
+                </div>
+
+                <Metric image={Panel.img.src}>
+                  <div
+                    className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                  >
+                    <Counter to={10000} />
+                    <p className={`font-[600] text-[20px] fade-in-block`}>
+                      kWh of electricity generated
+                    </p>
+                  </div>
+                </Metric>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <Metric image={WindTurbine.img.src}>
+                  <div
+                    className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                  >
+                    <Counter to={4000} />
+                    <p className={`font-[600] text-[20px] fade-in-block`}>
+                      Tonnes of CO₂ prevented
+                    </p>
+                  </div>
+                </Metric>
+
+                <Metric image={Revenue.img.src}>
+                  <div
+                    className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                  >
+                    <Counter to={30000} />
+                    <p className={`font-[600] text-[20px] fade-in-block`}>
+                      Revenue generated
+                    </p>
+                  </div>
+                </Metric>
+
+                <Metric image={EcoVillages.img.src}>
+                  <div
+                    className={`block text-center space-y-[5px] w-full z-2 text-white`}
+                  >
+                    <Counter to={6} />
+                    <p className={`font-[600] text-[20px] fade-in-block`}>
+                      Ecovillages
+                    </p>
+                  </div>
+                </Metric>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

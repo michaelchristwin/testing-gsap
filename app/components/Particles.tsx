@@ -98,10 +98,11 @@ function Particles() {
       }
     };
   }, []);
+
   return (
     <div
       ref={particlesContainer}
-      className="particles absolute top-0 left-0 w-full h-full overflow-hidden"
+      className="particles absolute z-10 top-0 left-0 w-full h-full overflow-hidden"
       id="particles"
     >
       <ParticleStyles />

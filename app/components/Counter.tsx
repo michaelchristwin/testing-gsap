@@ -1,59 +1,74 @@
-import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+import { CountUp } from "countup.js";
+import { useEffect, useRef } from "react";
 
-interface CounterProps {
-  from: number;
-  to: number;
-  duration?: number;
-  className?: string;
-  prefix?: string;
-  suffix?: string;
-}
+const Counter: React.FC<{ to: number }> = ({ to }) => {
+  const spanElement = useRef<HTMLDivElement>(null);
+  const countUpAnim = useRef<CountUp | null>(null);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const isVisible = useRef(false);
 
-const Counter: React.FC<CounterProps> = ({
-  from,
-  to,
-  duration = 2.5,
-  className = "",
-  prefix = "",
-  suffix = "",
-}) => {
-  const [displayValue, setDisplayValue] = useState(from);
-  const spanRef = useRef<HTMLSpanElement | null>(null);
-  const hasAnimatedRef = useRef(false);
+  async function initCountUp() {
+    if (!spanElement.current) return;
+    const countupModule = await import("countup.js");
+    countUpAnim.current = new countupModule.CountUp(spanElement.current, to, {
+      duration: 2.5,
+      useEasing: true,
+      useGrouping: true,
+    });
+  }
 
-  useGSAP(() => {
-    if (!spanRef.current || hasAnimatedRef.current) return;
-    const obj = { val: from };
+  const setupObserver = () => {
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            !isVisible.current &&
+            countUpAnim.current
+          ) {
+            isVisible.current = true;
+            countUpAnim.current.reset();
+            countUpAnim.current.start();
+          }
 
-    ScrollTrigger.create({
-      trigger: spanRef.current,
-      start: "top 80%",
-      once: true,
-      onEnter: () => {
-        hasAnimatedRef.current = true;
-        gsap.to(obj, {
-          val: to,
-          duration,
-          ease: "power1.out",
-          onUpdate: () => {
-            setDisplayValue(Math.round(obj.val));
-          },
+          if (!entry.isIntersecting && isVisible.current) {
+            isVisible.current = false;
+          }
         });
       },
-    });
-  }, [from, to, duration]);
+      {
+        threshold: 0.1,
+        rootMargin: "0px",
+      }
+    );
+
+    if (spanElement.current) {
+      observer.current.observe(spanElement.current);
+    }
+  };
+
+  useEffect(() => {
+    if (countUpAnim.current) {
+      countUpAnim.current.update(to);
+      if (isVisible.current) {
+        countUpAnim.current.start();
+      }
+    }
+  }, [to]);
+
+  useEffect(() => {
+    initCountUp().then(setupObserver);
+    return () => {
+      observer.current?.disconnect();
+    };
+  }, []);
+
   return (
     <span
-      ref={spanRef}
-      className={`font-mono font-extrabold xl:text-[60px] lg:text-[50px] md:text-[35px] text-[60px] text-white ${className}`}
+      ref={spanElement}
+      className={`font-mono font-extrabold xl:text-[60px] lg:text-[50px] md:text-[35px] text-[60px] text-white`}
     >
-      {prefix}
-      {displayValue}
-      {suffix}
+      0
     </span>
   );
 };
