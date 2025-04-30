@@ -38,7 +38,6 @@ const Page = () => {
           snap: 1 / 4,
         },
       });
-
       tl.to(".one", {
         duration: 2,
         xPercent: -110,
@@ -53,6 +52,43 @@ const Page = () => {
         xPercent: 110,
         duration: 2,
       });
+      tl.fromTo(
+        ".island",
+        { opacity: 0, scale: 0 },
+        {
+          scrollTrigger: {
+            trigger: ".one",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.5,
+          },
+          opacity: 1,
+          scale: 5,
+          ease: "power1.out",
+        }
+      );
+      tl.to(".heroText1", {
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.5,
+        },
+        opacity: 0,
+        x: -700,
+        ease: "power1.out",
+      });
+      tl.to(".heroText2", {
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.5,
+        },
+        opacity: 0,
+        x: 700,
+        ease: "power1.out",
+      });
     },
     { scope: wrapper }
   );
@@ -63,14 +99,14 @@ const Page = () => {
       className={`w-full`}
     >
       <div
-        className={`first h-[100vh] m-0 p-0 box-border flex justify-center items-center`}
+        className={`first h-[100vh] hero m-0 p-0 box-border flex justify-center items-center`}
         style={{
           background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a4a 100%)",
         }}
       >
         <Particles />
         <div className="w-[90%] sm:w-[50%] text-white">
-          <div className={`w-full`}>
+          <div className={`w-full heroText1`}>
             <h1 className="text-2xl text-start md:text-3xl font-bold mb-4">
               <span className="inline-block transition-all duration-700 ease-out playwrite-hr">
                 Introducing
@@ -87,7 +123,7 @@ const Page = () => {
               </span>
             </h1>
           </div>
-          <div>
+          <div className={`heroText2 w-full`}>
             <h1 className="text-6xl text-end md:text-8xl font-bold">
               <span
                 className="inline-block transition-all duration-700 ease-out june-expt-variable"
@@ -110,14 +146,13 @@ const Page = () => {
         className={`scrollCcontainer h-[100vh] bg-orange-400 m-0 p-0 relative flex justify-center items-center`}
       >
         <h1>The animation is finished</h1>
-        <div className="one flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-10">
+        <div className="one flex justify-center items-center absolute overflow-x-hidden top-0 right-0 left-0 bottom-0 z-10">
           <div
             style={{ backgroundImage: `url(${AnimeBg.img.src})` }}
             className="absolute inset-0 z-10 flex justify-center items-center bg-no-repeat bg-cover bg-center"
           >
             <div className="transition-all duration-700 ease-out flex items-center justify-center">
-              {/* Placeholder logo/image */}
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full flex items-center justify-center">
+              <div className="w-24 h-24 island md:w-32 md:h-32 rounded-full flex items-center justify-center">
                 <picture>
                   {Object.entries(Island.sources).map(([type, srcset]) => (
                     <source key={type} type={`image/${type}`} srcSet={srcset} />
@@ -210,13 +245,15 @@ const Page = () => {
           </section>
         </div>
         <div className="three sm:h-[100vh] h-fit flex justify-center items-center absolute top-0 right-0 left-0 bottom-0 z-8 bg-[#faf9f6]">
-          <div className="w-full h-full sm:space-y-8 space-y-4 transition-all duration-700 ease-out px-4">
-            <h2
-              className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[20px] fade-in-block`}
-            >
-              Let's build your project next
-            </h2>
-            <LogosCarousel />
+          <div className={`flex justify-center items-center w-full h-full`}>
+            <div className="w-full h-it sm:space-y-8 space-y-4 transition-all duration-700 ease-out px-4">
+              <h2
+                className={`text-center text-black font-semibold lg:text-[30px] md:text-[28px] text-[20px] fade-in-block`}
+              >
+                Let's build your project next
+              </h2>
+              <LogosCarousel />
+            </div>
           </div>
         </div>
       </div>

@@ -2,9 +2,7 @@ import { companyicons } from "~/assets/images/companies";
 
 const LogosCarousel: React.FC = () => {
   return (
-    <div
-      className={`grid sm:grid-cols-7 grid-cols-1 w-full sm:h-full h-screen card-grid`}
-    >
+    <div className={`grid sm:grid-cols-7 grid-cols-1 w-full h-fit card-grid`}>
       {companyicons.map((logo, i) => (
         <div
           key={i}
