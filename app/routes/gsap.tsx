@@ -85,17 +85,21 @@ const Page = () => {
       // Section 3 enter
       tl.fromTo(
         ".two",
-        { x: "-100%" },
-        { x: 0, duration: 0.8, ease: "power1.out" },
+        { opacity: 0 },
+        { opacity: 1, duration: 0.8, ease: "power1.out" },
         2.5
       );
       // Section 3 exit
-      tl.to(".two", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 3.5);
+      tl.to(
+        ".two",
+        { x: "-100%", opacity: 0, duration: 0.5, ease: "power1.inOut" },
+        3.5
+      );
       // Section 4 enter
       tl.fromTo(
         ".three",
-        { y: "-100%" },
-        { y: 0, duration: 0.5, ease: "power1.out" },
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power1.out" },
         4.0
       );
     },
