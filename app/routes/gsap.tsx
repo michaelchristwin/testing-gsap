@@ -35,9 +35,7 @@ const Page = () => {
   useGSAP(
     () => {
       if (!containerRef.current) return;
-
-      // Create timeline for section transitions
-      const sections = 6; // Now you have 4 sections
+      const sections = 6;
       const endScroll = window.innerHeight * (sections - 1);
       let tl = gsap.timeline({
         scrollTrigger: {
@@ -130,7 +128,6 @@ const Page = () => {
         6
       );
     },
-
     { scope: containerRef }
   );
 
@@ -149,7 +146,7 @@ const Page = () => {
 
   useEffect(() => {
     if (!lenis) return;
-    const snap = new Snap(lenis, {});
+    const snap = new Snap(lenis, { velocityThreshold: 10 });
     Array.from({ length: 6 }).map((_, i) => {
       snap.add(window.innerHeight * i);
       console.log("Added snap for index: ", i + 1);
