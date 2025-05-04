@@ -2,12 +2,7 @@ import { useEffect, useRef } from "react";
 import LogosCarousel from "../LogosCarousel";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
-
-// Register plugin properly
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(SplitText);
-  console.log("SplitText registered");
-}
+gsap.registerPlugin(SplitText);
 
 export default function CompaniesSection() {
   const containerRef = useRef(null);

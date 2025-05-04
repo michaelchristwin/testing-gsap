@@ -9,10 +9,7 @@ import CompaniesSection from "~/components/sections/CompaniesSection";
 import RightExit from "~/components/sections/RightExit";
 import FinalSection from "~/components/sections/FinalSection";
 import { useAnimation } from "~/context/AnimationContext";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
-}
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function meta({}: Route.MetaArgs) {
   return [
