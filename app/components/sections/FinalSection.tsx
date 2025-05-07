@@ -3,7 +3,7 @@ import Applications from "../Applications";
 export default function FinalSection() {
   return (
     <div
-      className={`five section h-screen flex-col justify-between items-center`}
+      className={`five section h-[100dvh] flex-col justify-between items-center`}
     >
       <Applications />
       <footer

@@ -9,7 +9,7 @@ import Metric from "../Metric";
 
 function MetricsSection() {
   return (
-    <div className="two section h-screen flex justify-center items-center px-4">
+    <div className="two section h-[100dvh] flex justify-center items-center px-4">
       <section className={`h-full w-full bg-[#faf9f6] text-black`}>
         <div className="h-full py-12">
           <div className="space-y-[50px]">

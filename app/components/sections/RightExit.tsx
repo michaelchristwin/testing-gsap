@@ -1,7 +1,7 @@
 export default function RightExit() {
   return (
     <div
-      className={`four section h-screen flex justify-center items-center px-4`}
+      className={`four section h-[100dvh] flex justify-center items-center px-4`}
     >
       <div className="text-center text-black px-4 w-full">
         <h2 className="text-4xl md:text-6xl font-bold">Right Exit</h2>

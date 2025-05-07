@@ -37,7 +37,7 @@ function Hero() {
   return (
     <section
       ref={heroRef}
-      className="h-screen hero relative section m-0 p-0 box-border flex justify-center items-center"
+      className="h-[100dvh] hero relative section m-0 p-0 box-border flex justify-center items-center"
       style={{
         background: "linear-gradient(135deg, #0a0a1a 0%, #1a1a4a 100%)",
       }}

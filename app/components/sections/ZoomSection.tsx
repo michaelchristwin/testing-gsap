@@ -12,7 +12,7 @@ function ZoomSection() {
     tl.current.fromTo(
       islandRef.current,
       { opacity: 1, scale: 1 },
-      { opacity: 0, scale: 5, duration: 1 }
+      { opacity: 0, scale: 7, duration: 1 }
     );
   };
 
@@ -23,7 +23,7 @@ function ZoomSection() {
 
   usePageScroller(animateIsland, reverseIslandAnimation, 1);
   return (
-    <div className="islandSection section h-screen flex justify-center items-center relative">
+    <div className="islandSection section h-[100dvh] flex justify-center items-center relative">
       <div
         style={{ backgroundImage: `url(${AnimeBg.img.src})` }}
         className="absolute inset-0 z-10 flex justify-center items-center bg-no-repeat bg-cover bg-center"

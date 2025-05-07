@@ -54,11 +54,12 @@ export default function CompaniesSection() {
         y: 50,
         opacity: 0,
         duration: 1,
+        display: "none",
         onStart: () => {
           console.log("Cards animation");
         },
       },
-      { ease: "power2.out", y: 0, stagger: 0.1, opacity: 1 },
+      { display: "flex", ease: "power2.out", y: 0, stagger: 0.1, opacity: 1 },
       1 // Reduced delay to make cards appear sooner
     );
 
@@ -86,7 +87,7 @@ export default function CompaniesSection() {
 
   return (
     <div
-      className="three section h-screen flex justify-center items-center px-4"
+      className="three section h-[100dvh] flex justify-center items-center px-4"
       ref={containerRef}
     >
       <div className="flex justify-center items-center w-full h-full">

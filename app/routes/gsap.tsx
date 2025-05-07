@@ -9,6 +9,7 @@ import CompaniesSection from "~/components/sections/CompaniesSection";
 import RightExit from "~/components/sections/RightExit";
 import FinalSection from "~/components/sections/FinalSection";
 import { useAnimation } from "~/context/AnimationContext";
+import IslandSection from "~/components/sections/IslandSection";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function meta({}: Route.MetaArgs) {
@@ -23,9 +24,10 @@ const Page = () => {
 
   return (
     <div className="overflow-hidden h-[100%]">
-      <div ref={containerRef} className="w-full h-[100vh] p-0 m-0 relative">
+      <div ref={containerRef} className="w-full h-[100dvh] p-0 m-0 relative">
         <Hero />
         <ZoomSection />
+        <IslandSection />
         <MetricsSection />
         <CompaniesSection />
         <RightExit />
