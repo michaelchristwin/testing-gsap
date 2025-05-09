@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { gsap, Power4, Power2 } from "gsap";
-import usePageScroller from "~/hooks/usePageScroller";
 
 const animations = [
   {
@@ -137,12 +136,30 @@ function IslandSection() {
     });
   };
 
-  const reverseAnaimation = () => {
+  const revertAnaimation = () => {
     if (!masterTimeline.current) return;
-    masterTimeline.current.reverse();
+    masterTimeline.current.revert();
   };
 
-  usePageScroller(animation, reverseAnaimation, 2);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animation();
+        } else {
+          revertAnaimation();
+        }
+      },
+
+      { threshold: 0.1 }
+    );
+
+    if (iphoneRef.current) observer.observe(iphoneRef.current);
+
+    return () => {
+      if (iphoneRef.current) observer.unobserve(iphoneRef.current);
+    };
+  }, []);
   return (
     <section className="animation relative flex justify-center items-center w-[100vw] h-[100vh]">
       <img
