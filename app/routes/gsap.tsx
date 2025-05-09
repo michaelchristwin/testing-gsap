@@ -1,7 +1,4 @@
 import type { Route } from "./+types/gsap";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Hero from "~/components/sections/Hero";
 import ZoomSection from "~/components/sections/ZoomSection";
 import MetricsSection from "~/components/sections/MetricsSection";
@@ -10,7 +7,6 @@ import RightExit from "~/components/sections/RightExit";
 import FinalSection from "~/components/sections/FinalSection";
 import { useAnimation } from "~/context/AnimationContext";
 import IslandSection from "~/components/sections/IslandSection";
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export function meta({}: Route.MetaArgs) {
   return [

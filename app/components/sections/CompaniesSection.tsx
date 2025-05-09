@@ -4,8 +4,10 @@ import LogosCarousel from "../LogosCarousel";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { companyicons } from "~/assets/images/companies";
-gsap.registerPlugin(SplitText);
 
+if (typeof window !== undefined) {
+  gsap.registerPlugin(SplitText);
+}
 export default function CompaniesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const splitTextRef = useRef<HTMLHeadingElement>(null);
