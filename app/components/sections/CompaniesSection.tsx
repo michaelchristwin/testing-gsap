@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import LogosCarousel from "../LogosCarousel";
 import { gsap } from "gsap";
-import { SplitText } from "gsap/SplitText";
+import { SplitText } from "gsap/dist/SplitText";
 import { companyicons } from "~/assets/images/companies";
 
 if (typeof window !== undefined) {
