@@ -1,4 +1,4 @@
-import { CountUp } from "countup.js";
+import { type CountUp } from "countup.js";
 import { useEffect, useRef } from "react";
 
 const Counter: React.FC<{ to: number }> = ({ to }) => {
