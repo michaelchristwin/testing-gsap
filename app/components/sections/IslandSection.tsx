@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { gsap, Power4, Power2 } from "gsap";
+import { gsap, Power4, Power2 } from "gsap/gsap-core";
 
 const animations = [
   {
