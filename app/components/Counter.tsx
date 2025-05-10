@@ -1,15 +1,16 @@
-import { CountUp } from "countup.js";
+import type { CountUp } from "countup.js";
 import { useEffect, useRef } from "react";
 
 const Counter: React.FC<{ to: number }> = ({ to }) => {
   const spanElement = useRef<HTMLDivElement>(null);
-  const countUpAnim = useRef<CountUp | null>(null);
+  let countUpAnim: CountUp;
   const observer = useRef<IntersectionObserver | null>(null);
   const isVisible = useRef(false);
 
   async function initCountUp() {
     if (!spanElement.current) return;
-    countUpAnim.current = new CountUp(spanElement.current, to, {
+    const countUpModule = await import("countup.js");
+    countUpAnim = new countUpModule.CountUp(spanElement.current, to, {
       duration: 2.5,
       useEasing: true,
       useGrouping: true,
@@ -20,14 +21,10 @@ const Counter: React.FC<{ to: number }> = ({ to }) => {
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (
-            entry.isIntersecting &&
-            !isVisible.current &&
-            countUpAnim.current
-          ) {
+          if (entry.isIntersecting && !isVisible.current && countUpAnim) {
             isVisible.current = true;
-            countUpAnim.current.reset();
-            countUpAnim.current.start();
+            countUpAnim.reset();
+            countUpAnim.start();
           }
 
           if (!entry.isIntersecting && isVisible.current) {
@@ -47,10 +44,10 @@ const Counter: React.FC<{ to: number }> = ({ to }) => {
   };
 
   useEffect(() => {
-    if (countUpAnim.current) {
-      countUpAnim.current.update(to);
+    if (countUpAnim) {
+      countUpAnim.update(to);
       if (isVisible.current) {
-        countUpAnim.current.start();
+        countUpAnim.start();
       }
     }
   }, [to]);
