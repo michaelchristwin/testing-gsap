@@ -1,4 +1,4 @@
-import { type CountUp } from "countup.js";
+import { CountUp } from "countup.js";
 import { useEffect, useRef } from "react";
 
 const Counter: React.FC<{ to: number }> = ({ to }) => {
@@ -9,8 +9,7 @@ const Counter: React.FC<{ to: number }> = ({ to }) => {
 
   async function initCountUp() {
     if (!spanElement.current) return;
-    const countupModule = await import("countup.js");
-    countUpAnim.current = new countupModule.CountUp(spanElement.current, to, {
+    countUpAnim.current = new CountUp(spanElement.current, to, {
       duration: 2.5,
       useEasing: true,
       useGrouping: true,
